@@ -17,13 +17,13 @@ import { addToCart, removeFromCart } from '../actions/cartActions';
 const CartScreen = () => {
   const { productId } = useParams();
   const { search } = useLocation();
+  const qty = search ? Number(search.split('=')[1]) : 1;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-
-  const qty = search ? Number(search.split('=')[1]) : 1;
 
   useEffect(() => {
     if (productId) {
