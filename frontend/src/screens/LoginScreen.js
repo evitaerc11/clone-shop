@@ -13,10 +13,11 @@ const LoginScreen = () => {
 
   const dispatch = useDispatch();
   const location = useLocation();
-  const redirect = location.search ? location.search.split('=')[1] : '/';
 
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
+
+  const redirect = location.search ? location.search.split('=')[1] : '/';
 
   const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ const LoginScreen = () => {
     if (userInfo) {
       navigate(redirect);
     }
-  });
+  }, [navigate, redirect, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
