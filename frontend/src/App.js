@@ -28,41 +28,48 @@ function App() {
           <Routes>
             <Route path='/' element={<HomeScreen />} />
             <Route path='/product/:id' element={<ProductScreen />} />
+
             <Route path='/cart'>
               <Route path=':productId' element={<CartScreen />} />
               <Route path='' element={<CartScreen />} />
             </Route>
+
             <Route path='/login'>
               <Route path='' element={<LoginScreen />} />
               <Route path='shipping' element={<ShippingScreen />} />
             </Route>
+
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/shipping' element={<ShippingScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />
             <Route path='/order/:orderId' element={<OrderScreen />} />
-            <Route path='/admin/userlist' element={<UserListScreen />} />
-            <Route
-              path='/admin/user/:userId/edit'
-              element={<UserEditScreen />}
-            />
-            <Route path='/admin/productlist' element={<ProductListScreen />} />
-            <Route
-              path='/admin/product/:productId/edit'
-              element={<ProductEditScreen />}
-            />
-            <Route path='/admin/orderlist' element={<OrderListScreen />} />
-            <Route path='/search/:keyword' element={<HomeScreen />} />
             <Route path='/page/:pageNumber' element={<HomeScreen />} />
-            <Route
-              path='/search/:keyword/page/:pageNumber'
-              element={<HomeScreen />}
-            />
-            <Route
-              path='/admin/productlist/:pageNumber'
-              element={<ProductListScreen />}
-            />
+
+            <Route path='/search'>
+              <Route path=':keyword' element={<HomeScreen />} />
+              <Route
+                path=':keyword/page/:pageNumber'
+                element={<HomeScreen />}
+              />
+              <Route path=':keyword/sort/:sort' element={<HomeScreen />} />
+            </Route>
+
+            <Route path='/admin'>
+              <Route path='userlist' element={<UserListScreen />} />
+              <Route path='orderlist' element={<OrderListScreen />} />
+              <Route path='productlist' element={<ProductListScreen />} />
+              <Route path='user/:userId/edit' element={<UserEditScreen />} />
+              <Route
+                path='product/:productId/edit'
+                element={<ProductEditScreen />}
+              />
+              <Route
+                path='productlist/:pageNumber'
+                element={<ProductListScreen />}
+              />
+            </Route>
           </Routes>
         </Container>
       </main>

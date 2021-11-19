@@ -1,12 +1,23 @@
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
+import asyncjs from 'async';
 
 // @desc   Fetch all products
 // @route  GET /api/products
 // @access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 6;
+  const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
+
+  const sort = req.query.sort || '';
+  const sortProducts =
+    sort === 'lowest'
+      ? { price: 1 }
+      : sort === 'highest'
+      ? { price: -1 }
+      : sort === 'toprated'
+      ? { rating: -1 }
+      : { updatedAt: 1 };
 
   const keyword = req.query.keyword
     ? {
@@ -19,6 +30,7 @@ const getProducts = asyncHandler(async (req, res) => {
 
   const count = await Product.countDocuments({ ...keyword });
   const products = await Product.find({ ...keyword })
+    .sort(sortProducts)
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
@@ -149,6 +161,30 @@ const getTopProducts = asyncHandler(async (req, res) => {
   res.json(products);
 });
 
+// // @desc    Update stock
+// // @route   PUT /api/products/test
+// // @access  Private/Admin
+// const updateStock = asyncHandler(async (req, res) => {
+//   const order = req.body;
+//   asyncjs.eachSeries(
+//     order,
+//     function updateProduct(product, done) {
+//       Product.updateOne(
+//         { _id: product.product },
+//         { $inc: { countInStock: -product.qty } },
+//         done
+//       );
+//     },
+//     function allDone(err) {
+//       if (err) {
+//         res.json('something wrong');
+//       } else {
+//         res.json('ok');
+//       }
+//     }
+//   );
+// });
+
 export {
   getProducts,
   getProductById,
@@ -157,4 +193,5 @@ export {
   createProduct,
   createProductReview,
   getTopProducts,
+  // updateStock,
 };
