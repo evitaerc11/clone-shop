@@ -73,7 +73,6 @@ const OrderScreen = () => {
   ]);
 
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
 
@@ -89,7 +88,7 @@ const OrderScreen = () => {
     <>
       <h1>Order {order._id}</h1>
       <Row>
-        <Col md={8}>
+        <Col lg={8}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>Shipping</h2>
@@ -165,7 +164,7 @@ const OrderScreen = () => {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={4}>
+        <Col lg={4}>
           <Card>
             <ListGroup variant='flush'>
               <ListGroup.Item>

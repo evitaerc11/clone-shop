@@ -71,6 +71,8 @@ const UserListScreen = () => {
                       <i className='fas fa-edit'></i>
                     </Button>
                   </Link>
+                </td>
+                <td>
                   <Button
                     variant='danger'
                     className='btn-sm'

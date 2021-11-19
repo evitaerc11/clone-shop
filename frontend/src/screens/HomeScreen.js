@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 
@@ -13,6 +13,8 @@ import ProductCarousel from '../components/ProductCarousel';
 const HomeScreen = () => {
   const { keyword } = useParams();
   const { pageNumber } = useParams() || 1;
+  const { sort } = useParams();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -20,13 +22,41 @@ const HomeScreen = () => {
   const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
-    dispatch(listProducts(keyword, pageNumber));
-  }, [dispatch, keyword, pageNumber]);
+    dispatch(listProducts(keyword, pageNumber, sort));
+  }, [dispatch, keyword, pageNumber, sort]);
 
   return (
     <>
-      {!keyword && <ProductCarousel />}
-      <h1>Lasted Products</h1>
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to='/' className='btn btn-light'>
+          Go Back
+        </Link>
+      )}
+      {keyword ? (
+        <Row>
+          <Col lg={10} md={9}>
+            <h1>Results</h1>
+          </Col>
+          <Col lg={2} md={3}>
+            <select
+              value={sort}
+              onChange={(e) => {
+                navigate(`/search/${keyword}/sort/${e.target.value}`);
+              }}
+            >
+              <option value='newest'>Newest</option>
+              <option value='lowest'>Price: Low to high</option>
+              <option value='highest'>Price: High to low</option>
+              <option value='toprated'>Top rated</option>
+            </select>
+          </Col>
+        </Row>
+      ) : (
+        <h1>Lasted Products</h1>
+      )}
+
       {loading ? (
         <Loader />
       ) : error ? (

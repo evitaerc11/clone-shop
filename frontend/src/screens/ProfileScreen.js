@@ -55,7 +55,7 @@ const ProfileScreen = () => {
 
   return (
     <Row>
-      <Col md={3}>
+      <Col lg={3}>
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
@@ -98,13 +98,15 @@ const ProfileScreen = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button type='submit' variant='primary' className='mt-3'>
+          <Button type='submit' variant='primary' className='mt-3 '>
             Update
           </Button>
         </Form>
       </Col>
-      <Col md={9}>
-        <h2>My Orders</h2>
+      <Col lg={9}>
+        <h2 className='d-flex align-items-center justify-content-center'>
+          My Orders
+        </h2>
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (

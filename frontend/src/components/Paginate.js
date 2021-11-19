@@ -1,16 +1,15 @@
 import React from 'react';
-import { Pagination } from 'react-bootstrap';
+import { Pagination, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Paginate = ({ page, pages, isAdmin = false, keyword = '' }) => {
   return (
     pages > 1 && (
-      <Pagination>
+      <Pagination className='d-flex align-items-center justify-content-center'>
         {[...Array(pages).keys()].map((x) => (
-          <Pagination.Item
-            as={Link}
+          <Link
             key={x + 1}
-            href={
+            to={
               !isAdmin
                 ? keyword
                   ? `/search/${keyword}/page/${x + 1}`
@@ -19,8 +18,10 @@ const Paginate = ({ page, pages, isAdmin = false, keyword = '' }) => {
             }
             active={x + 1 === page}
           >
-            {x + 1}
-          </Pagination.Item>
+            <Button className='button' variant='outline-secondary'>
+              {x + 1}
+            </Button>
+          </Link>
         ))}
       </Pagination>
     )

@@ -13,7 +13,6 @@ import {
 
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
-
 const CartScreen = () => {
   const { productId } = useParams();
   const { search } = useLocation();
@@ -40,7 +39,7 @@ const CartScreen = () => {
   };
   return (
     <Row>
-      <Col md={8}>
+      <Col lg={8}>
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message variant='info'>
@@ -58,7 +57,7 @@ const CartScreen = () => {
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
-                  <Col md={2}>
+                  <Col md={2} xs={10}>
                     <Form.Control
                       as='select'
                       value={item.qty}
@@ -75,7 +74,7 @@ const CartScreen = () => {
                       ))}
                     </Form.Control>
                   </Col>
-                  <Col md={2}>
+                  <Col md={2} xs={2}>
                     <Button
                       variant='light'
                       onClick={() => removeFromCartHandler(item.product)}
@@ -89,7 +88,7 @@ const CartScreen = () => {
           </ListGroup>
         )}
       </Col>
-      <Col md={4}>
+      <Col lg={4}>
         <Card>
           <ListGroup variant='flush'>
             <ListGroup.Item>

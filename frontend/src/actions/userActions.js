@@ -4,9 +4,11 @@ import {
   USER_DELETE_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
+  USER_DETAILS_RESET,
   USER_DETAILS_SUCCESS,
   USER_LIST_FAIL,
   USER_LIST_REQUEST,
+  USER_LIST_RESET,
   USER_LIST_SUCCESS,
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
@@ -23,6 +25,7 @@ import {
   USER_UPDATE_SUCCESS,
 } from '../constants/userConstants';
 import axios from 'axios';
+import { MY_ORDERS_RESET } from '../constants/orderConstants';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -64,6 +67,9 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem('shippingAddress');
   localStorage.removeItem('paymentMethod');
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: MY_ORDERS_RESET });
+  dispatch({ type: USER_LIST_RESET });
   document.location.href = '/login';
 };
 
@@ -252,6 +258,8 @@ export const updateUser = (user) => async (dispatch, getState) => {
     });
 
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+
+    dispatch({ type: USER_DETAILS_RESET });
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,

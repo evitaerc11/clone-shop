@@ -73,10 +73,10 @@ const ProductListScreen = () => {
   return (
     <>
       <Row className='align-items-center'>
-        <Col>
+        <Col lg={10}>
           <h1>Products</h1>
         </Col>
-        <Col className='text-end'>
+        <Col lg={2}>
           <Button className='my-3' onClick={createProductHandler}>
             <i className='fas fa-plus'></i>Create Product
           </Button>
@@ -116,6 +116,8 @@ const ProductListScreen = () => {
                         <i className='fas fa-edit'></i>
                       </Button>
                     </Link>
+                  </td>
+                  <td>
                     <Button
                       variant='danger'
                       className='btn-sm'
