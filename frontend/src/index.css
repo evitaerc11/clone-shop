@@ -71,3 +71,8 @@ h1 {
     object-fit: cover;
   }
 }
+
+/* Fix img height product details */
+.h-30 {
+  height: 30vw;
+}
