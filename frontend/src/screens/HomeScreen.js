@@ -12,7 +12,7 @@ import ProductCarousel from '../components/ProductCarousel';
 
 const HomeScreen = () => {
   const { keyword } = useParams();
-  const { pageNumber } = useParams() || 1;
+  const { pageNumber } = useParams();
   const { sort } = useParams();
   const navigate = useNavigate();
 

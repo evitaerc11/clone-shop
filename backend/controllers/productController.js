@@ -17,7 +17,7 @@ const getProducts = asyncHandler(async (req, res) => {
       ? { price: -1 }
       : sort === 'toprated'
       ? { rating: -1 }
-      : { updatedAt: 1 };
+      : { updatedAt: -1 };
 
   const keyword = req.query.keyword
     ? {

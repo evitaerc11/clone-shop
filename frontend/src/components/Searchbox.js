@@ -9,6 +9,7 @@ const Searchbox = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    // remove whitespace start and end of string
     if (keyword.trim()) {
       navigate(`/search/${keyword}`);
     } else {
