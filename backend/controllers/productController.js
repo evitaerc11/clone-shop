@@ -161,29 +161,30 @@ const getTopProducts = asyncHandler(async (req, res) => {
   res.json(products);
 });
 
-// // @desc    Update stock
-// // @route   PUT /api/products/test
-// // @access  Private/Admin
-// const updateStock = asyncHandler(async (req, res) => {
-//   const order = req.body;
-//   asyncjs.eachSeries(
-//     order,
-//     function updateProduct(product, done) {
-//       Product.updateOne(
-//         { _id: product.product },
-//         { $inc: { countInStock: -product.qty } },
-//         done
-//       );
-//     },
-//     function allDone(err) {
-//       if (err) {
-//         res.json('something wrong');
-//       } else {
-//         res.json('ok');
-//       }
-//     }
-//   );
-// });
+// @desc    Update stock
+// @route   PUT /api/products/test
+// @access  Private/Admin
+const updateStock = asyncHandler(async (req, res) => {
+  const order = req.body;
+
+  asyncjs.eachSeries(
+    order,
+    function updateProduct(product, done) {
+      Product.updateOne(
+        { _id: product.product },
+        { $inc: { countInStock: -product.qty } },
+        done
+      );
+    },
+    function allDone(err) {
+      if (err) {
+        res.json('something wrong');
+      } else {
+        res.json('ok');
+      }
+    }
+  );
+});
 
 export {
   getProducts,
@@ -193,5 +194,5 @@ export {
   createProduct,
   createProductReview,
   getTopProducts,
-  // updateStock,
+  updateStock,
 };

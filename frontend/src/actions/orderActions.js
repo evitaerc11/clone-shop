@@ -210,6 +210,9 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
       config
     );
 
+    //updateStock
+    await axios.put('/api/products/test', order.orderItems, config);
+
     dispatch({
       type: ORDER_DELIVER_SUCCESS,
       payload: data,
