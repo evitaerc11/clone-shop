@@ -8,7 +8,7 @@ import {
   updateProduct,
   getProducts,
   getProductById,
-  // updateStock,
+  updateStock,
 } from '../controllers/productController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -16,12 +16,11 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 router.route('/').get(getProducts).post(protect, admin, createProduct);
 router.route('/:id/reviews').post(protect, createProductReview);
 router.get('/top', getTopProducts);
+router.route('/test').put(protect, admin, updateStock);
 router
   .route('/:id')
   .get(getProductById)
   .delete(protect, admin, deleteProduct)
   .put(protect, admin, updateProduct);
-
-// router.put('/test', protect, admin, updateStock);
 
 export default router;
